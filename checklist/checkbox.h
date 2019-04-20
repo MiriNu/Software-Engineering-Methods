@@ -6,9 +6,8 @@
 
 class CheckBox
 {
-    DWORD id;
-    short x;
-    short y;
+    SHORT x;
+    SHORT y;
     bool selected;
     bool focused;
     WORD color;
@@ -18,31 +17,27 @@ class CheckBox
     public:
 
         //Constructor
-        CheckBox(DWORD id, short x, short y, std::string value = "DEFAULT");
+        CheckBox(SHORT x, SHORT y, std::string value = "DEFAULT");
 
         //Getters
-        DWORD getID() const;
+		SHORT getY() const;
+		SHORT getX() const;
         bool getSelected() const;
         bool getFocused() const;
         WORD getColor() const;
         WORD getBg() const; 
-        HANDLE getCSB() const;
         std::string getValue() const;
         
-
         //Setters
-        void setX(const short& x);
-        void setY(const short& y);
-        void setSelected(const bool& selected); 
-        void setFocused(const bool& focused);
+		void setY(const SHORT y);
+		void setX(const SHORT x);
+        void setSelected(const bool selected); 
+        void setFocused(const bool focused);
+		void setValue(const std::string value);
 
+		//Draw a single CB on screen
         void draw(HANDLE hCSB);
-        void handleKeyboardEvent(KEY_EVENT_RECORD&);
-        void handleMouseEvent(MOUSE_EVENT_RECORD&);
-
-    private:
         
-
 
 };
 

@@ -7,27 +7,41 @@
 #include "checkbox.h"
 class CheckList
 {
-    HANDLE hCSB;
     std::vector<CheckBox> cb;
-    short x;
-    short y;
+    SHORT x;
+    SHORT y;
 
     public:
 
         //Constructor
-        CheckList( short x, short y);
+        CheckList( SHORT x, SHORT y);
 
         //Getters
-	    short getX() const;
-        short getY() const;
+	    SHORT getX() const;
+        SHORT getY() const;
+		//Only one cb should be focused at each time, this function provides the pos of said cb
+        int getFocusedPos() const;
+		//Get a vector of selected attributes
+		std::vector<int> getSelectedPos() const;
+		//Get the width of the cl according to the longest cb value
+		int getCLWidth() const;
+		//Get the height of the cl according to the size of cb
+		int getCLheight() const;
 
         //Setters
-        void setX(const short& x);
-        void setY(const short& y);
+        void setCoord(const SHORT x, const SHORT y);
 
+		//Event handlers
+        void handleKeyboardEvent(KEY_EVENT_RECORD&, HANDLE hCSB);
+        void handleMouseEvent(MOUSE_EVENT_RECORD&, HANDLE hCSB);
+        
+		//Add cb by value
         void addCheckBox (const std::string value);
-        void deleteCheckBox (DWORD id);
+		//Delete cb by position
+        void deleteCheckBox (SHORT pos);
+		//Draw all existing checkboxes on a given screen
         void draw(HANDLE hCSB);
+        
 
     private:
 
