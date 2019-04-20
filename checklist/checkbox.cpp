@@ -23,23 +23,35 @@ void CheckBox::setSelected(const bool slctd)	{ selected = slctd; }
 void CheckBox::setFocused(const bool fcsd)		{ focused = fcsd; }
 void CheckBox::setValue(const std::string val)	{ value = "[ ] " + val; }
 
-
-void CheckBox::draw (HANDLE hCSB)
+//Draw a single CB on screen
+bool CheckBox::draw (HANDLE hCSB)
 {
     DWORD written;
 
-    WriteConsoleOutputCharacterA (hCSB,value.c_str(),value.size(),COORD{x,y},&written);
+    if (!WriteConsoleOutputCharacterA (hCSB,value.c_str(),value.size(),COORD{x,y},&written))
+    {
+        return false;
+    }
     if (focused)
     {
-        FillConsoleOutputAttribute(hCSB,FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY | COMMON_LVB_REVERSE_VIDEO,value.size(),COORD{x,y},&written);
+        if (!FillConsoleOutputAttribute(hCSB,FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY | COMMON_LVB_REVERSE_VIDEO,value.size(),COORD{x,y},&written))
+        {
+            return false;
+        }
     }
 	else
 	{
-		FillConsoleOutputAttribute(hCSB, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY , value.size(), COORD{ x,y }, &written);
+		if (!FillConsoleOutputAttribute(hCSB, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY , value.size(), COORD{ x,y }, &written))
+        {
+            return false;
+        }
 	}
     if (selected)
     {
-        WriteConsoleOutputCharacterA (hCSB,"V",1,COORD{x+1,y},&written);
+        if (!WriteConsoleOutputCharacterA (hCSB,"V",1,COORD{(SHORT)(x+1),y},&written))
+        {
+            return false;
+        }
     }
-    
+    return true;
 }

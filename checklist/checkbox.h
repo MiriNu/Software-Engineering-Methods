@@ -36,7 +36,7 @@ class CheckBox
 		void setValue(const std::string value);
 
 		//Draw a single CB on screen
-        void draw(HANDLE hCSB);
+        bool draw(HANDLE hCSB);
         
 
 };

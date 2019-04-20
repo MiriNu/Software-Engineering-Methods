@@ -32,18 +32,16 @@ class CheckList
         void setCoord(const SHORT x, const SHORT y);
 
 		//Event handlers
-        void handleKeyboardEvent(KEY_EVENT_RECORD&, HANDLE hCSB);
-        void handleMouseEvent(MOUSE_EVENT_RECORD&, HANDLE hCSB);
+        bool handleKeyboardEvent(KEY_EVENT_RECORD&, HANDLE hCSB);
+        bool handleMouseEvent(MOUSE_EVENT_RECORD&, HANDLE hCSB);
         
 		//Add cb by value
         void addCheckBox (const std::string value);
 		//Delete cb by position
         void deleteCheckBox (SHORT pos);
 		//Draw all existing checkboxes on a given screen
-        void draw(HANDLE hCSB);
+        bool draw(HANDLE hCSB);
         
-
-    private:
 
 };
 
