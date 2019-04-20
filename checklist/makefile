@@ -1,18 +1,10 @@
-ifeq ($(OS), Windows_NT)
-	CXX = g++
-else
-	CXX = i686-w64-mingw32-g++
-endif
-
-OBJS = main.o checkbox.o checklist.o 
 main.o: main.cpp
-	$(CXX) -c main.cpp -o main.o
+	g++ -c main.cpp -o main.o -static
 checkbox.o: checkbox.cpp checkbox.h
-	$(CXX) -c checkbox.cpp -I. -o checkbox.o	
+	g++ -c checkbox.cpp -I. -o checkbox.o -static
 checklist.o: checklist.cpp checklist.h
-	$(CXX) -c checklist.cpp -I. -o checklist.o		
-
-all: $(OBJS)
-	$(CXX) $(OBJS) -o main.exe -static
+	g++ -c checklist.cpp -I. -o checklist.o -static
+all: main.o checkbox.o checklist.o
+	g++ main.o checkbox.o checklist.o -o main.exe -static
 clean:
 	del *.o main.exe
