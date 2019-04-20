@@ -66,10 +66,13 @@ void CheckList::setCoord(const SHORT xPos, const SHORT yPos)
 }
 
 //Keyboard event handler
-void CheckList::handleKeyboardEvent(KEY_EVENT_RECORD& event, HANDLE hCSB)
+bool CheckList::handleKeyboardEvent(KEY_EVENT_RECORD& event, HANDLE hCSB)
 {
 	DWORD focusedCB = getFocusedPos();
-    if (!event.bKeyDown) return;
+    if (!event.bKeyDown)
+	{
+		return true;
+	}
     
     switch(event.wVirtualKeyCode)
     {
@@ -110,11 +113,15 @@ void CheckList::handleKeyboardEvent(KEY_EVENT_RECORD& event, HANDLE hCSB)
             break;
             
     }
-    draw(hCSB);  
+    if (!draw(hCSB))
+	{
+		return false;
+	}
+	return true;
 }
 
 //Mouse event handler
-void CheckList::handleMouseEvent(MOUSE_EVENT_RECORD& event, HANDLE hCSB)
+bool CheckList::handleMouseEvent(MOUSE_EVENT_RECORD& event, HANDLE hCSB)
 {
 	if (event.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED )
 	{
@@ -138,9 +145,12 @@ void CheckList::handleMouseEvent(MOUSE_EVENT_RECORD& event, HANDLE hCSB)
 				}
 			}
 		}
-		draw(hCSB);
-
+		if (!draw(hCSB))
+		{
+			return false;
+		}
 	}
+	return true;
 }
 
 //Add checkbox to the list of checkboxes (checklist)
@@ -166,11 +176,15 @@ void CheckList::deleteCheckBox(SHORT pos)
 }
 
 //Draw all existing checkboxes on a given screen
-void CheckList::draw (HANDLE hCSB)
+bool CheckList::draw (HANDLE hCSB)
 {
     for (int i=0; i<cb.size(); i++)
     {
-        cb[i].draw(hCSB);
+        if (!cb[i].draw(hCSB))
+		{
+			return false;
+		}
     }
+	return true;
 }
 
