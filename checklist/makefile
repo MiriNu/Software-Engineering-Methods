@@ -1,10 +1,11 @@
-main.o: main.cpp
-	g++ -c main.cpp -o main.o -static
-checkbox.o: checkbox.cpp checkbox.h
-	g++ -c checkbox.cpp -I. -o checkbox.o -static
-checklist.o: checklist.cpp checklist.h
-	g++ -c checklist.cpp -I. -o checklist.o -static
-all: main.o checkbox.o checklist.o
-	g++ main.o checkbox.o checklist.o -o main.exe -static
-clean:
-	del *.o main.exe
+ifeq ($(OS), Windows_NT)
+	CXX = g++
+else
+	CXX = /usr/bin/i686-w64-mingw32-g++
+endif
+
+OBJS = checkbox.o main.o checklist.o
+
+all: $(OBJS)
+	$(CXX) $(OBJS) -o main.exe -static
+clean: rm -f *.o
