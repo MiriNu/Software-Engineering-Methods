@@ -29,7 +29,7 @@ class CheckList
 		int getCLheight() const;
 
         //Setters
-        void setCoord(const SHORT x, const SHORT y);
+        bool setCoord(const SHORT x, const SHORT y, HANDLE hCSB);
 
 		//Event handlers
         bool handleKeyboardEvent(KEY_EVENT_RECORD&, HANDLE hCSB);
@@ -38,10 +38,11 @@ class CheckList
 		//Add cb by value
         void addCheckBox (const std::string value);
 		//Delete cb by position
-        void deleteCheckBox (SHORT pos);
+        bool deleteCheckBox (SHORT pos, HANDLE hCSB);
 		//Draw all existing checkboxes on a given screen
         bool draw(HANDLE hCSB);
-        
+		//clear checklist
+		bool clear(HANDLE hCSB);
 
 };
 
