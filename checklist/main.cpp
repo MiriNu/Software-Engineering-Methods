@@ -4,10 +4,10 @@
  
 //Get selected checkboxes positions from checklist 
 std::string getSelectedItems(CheckList cl);
-//Remove given row
-bool deleteRow(HANDLE hNewScreenBuffer, COORD coord, std::string selectedItems);
+//Refresh selected items
+bool showSelected(HANDLE hNewScreenBuffer, CheckList cl);
 
-int main() 
+int main(void) 
 { 
 
 	//Create a new screen 
@@ -20,11 +20,11 @@ int main()
     hNewScreenBuffer = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 	if (hNewScreenBuffer == INVALID_HANDLE_VALUE)
 	{
-		fprintf(stderr,"Error: CreateConsoleScreenBuffer failed.\n");
+		std::cerr << "Error: CreateConsoleScreenBuffer failed.\n";
 	}
     if (!SetConsoleActiveScreenBuffer(hNewScreenBuffer))
 	{
-		fprintf(stderr,"Error: SetConsoleActiveScreenBuffer failed.\n");
+		std::cerr << stderr,"Error: SetConsoleActiveScreenBuffer failed.\n";
 	}
 
 	//Cursors are ugly, let's get rid of them. 
@@ -42,15 +42,32 @@ int main()
 		return 1;
 	}
 
-    CheckList cl(50,6);     
+    CheckList cl(50, 6);
     cl.addCheckBox("Lorem of house Ipsum");  
     cl.addCheckBox("AM I GOING TO BE THE CHOSEN ONE");  
 	cl.addCheckBox("meep");
 	cl.addCheckBox("Two types of Starks will die during April-May.");  
 	cl.addCheckBox("^\\_('v')_/^");  
-	cl.deleteCheckBox(2);
-	cl.setCoord(5,2);
-    cl.draw(hNewScreenBuffer);  
+	if (!cl.draw(hNewScreenBuffer))
+	{
+		return 1;
+	}
+	if (!cl.deleteCheckBox(2, hNewScreenBuffer))
+	{
+		return 1;
+	}
+	if (!cl.draw(hNewScreenBuffer))
+	{
+		return 1;
+	}
+	if(!cl.setCoord(5, 2, hNewScreenBuffer))
+	{
+		return 1;
+	}
+	if (!cl.draw(hNewScreenBuffer))
+	{
+		return 1;
+	}
 
 	while (1)
 	{
@@ -79,26 +96,13 @@ int main()
 					return 1;
 				}
 			}
+
+			if (ir.Event.MouseEvent.dwEventFlags != MOUSE_MOVED && !showSelected(hNewScreenBuffer, cl))
+			{
+				return 1;
+			}
 		}
 
-		std::string selectedItems = "Currently selected: "+ getSelectedItems(cl);
-		DWORD written;
-		COORD coord = { cl.getX() , (SHORT)(cl.getCLheight() + 2)};
-
-		//Delete previous output
-		if (!deleteRow(hNewScreenBuffer, coord, selectedItems))
-		{
-			return 1;
-		}
-		//Write currently selected checkboxes
-		if (!SetConsoleCursorPosition(hNewScreenBuffer, coord))
-		{
-			return 1;
-		}
-		if (!WriteConsole(hNewScreenBuffer, selectedItems.c_str(), selectedItems.size(), &written,NULL))
-		{
-			return 1;
-		}
 	}
 
     return 0; 
@@ -118,30 +122,25 @@ std::string getSelectedItems(CheckList cl)
  	return nums +"\n";
 }
 
-//Remove given row
-bool deleteRow(HANDLE hNewScreenBuffer, COORD coord, std::string selectedItems)
+//Refresh selected items
+bool showSelected(HANDLE hNewScreenBuffer, CheckList cl)
 {
+	std::string selectedItems = "Currently selected: " + getSelectedItems(cl);
 	DWORD written;
-
-	if (!SetConsoleCursorPosition(hNewScreenBuffer, coord))
-	{
-		return false;
-	}
-	std::string delrow = " ";
-	for (int i = 0; i < selectedItems.length(); i++)
-	{
-		delrow += "  ";
-	}
+	COORD coord = { cl.getX() , cl.getY() + (SHORT)(cl.getCLheight()) };
 
 	//Delete previous output
-	if (!WriteConsole(hNewScreenBuffer, delrow.c_str(), delrow.size(), &written, NULL))
+	if (!FillConsoleOutputCharacter(hNewScreenBuffer, ' ', selectedItems.length(), coord, &written))
 	{
 		return false;
 	}
-
+	//Write currently selected checkboxes
 	if (!SetConsoleCursorPosition(hNewScreenBuffer, coord))
 	{
-		return false;
+		return 1;
 	}
-	return true;
+	if (!WriteConsole(hNewScreenBuffer, selectedItems.c_str(), selectedItems.size(), &written, NULL))
+	{
+		return 1;
+	}
 }
