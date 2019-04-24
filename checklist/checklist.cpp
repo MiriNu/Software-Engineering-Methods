@@ -47,22 +47,28 @@ int	  CheckList::getCLWidth() const
 		}
 	}
 
-	return maxLen+1;
+	return maxLen+3;
 }
 
 //Get the height of the cl according to the size of cb
 int CheckList::getCLheight() const { return cb.size()+1; }
 
 //Setters
-void CheckList::setCoord(const SHORT xPos, const SHORT yPos)
+bool CheckList::setCoord(const SHORT xPos, const SHORT yPos, HANDLE hCSB)
 { 
+	if(!clear(hCSB))
+	{
+		return false;
+	}
 	x = xPos; 
 	y = yPos;
+
 	for (int i = 0; i < cb.size(); i++)
 	{
 		cb[i].setX(xPos);
 		cb[i].setY(yPos + i);
 	}
+	return true;
 }
 
 //Keyboard event handler
@@ -162,17 +168,24 @@ void CheckList::addCheckBox(const std::string value)
 }
 
 //Delete cb by position
-void CheckList::deleteCheckBox(SHORT pos)
+bool CheckList::deleteCheckBox(SHORT pos, HANDLE hCSB)
 {
+	if (!clear(hCSB))
+	{
+		return false;
+	}
+
 	if (pos >= 0 && pos < cb.size())
 	{
 		cb.erase(cb.begin()+pos);
+		for (int i = pos; i < cb.size(); i++)
+		{
+			cb[i].setY(cb[i].getY() - 1);
+		}
+		return true;
 	}
+	return false;
 
-	for (int i = pos; i < cb.size(); i++)
-	{
-		cb[i].setY(cb[i].getY()-1);
-	}
 }
 
 //Draw all existing checkboxes on a given screen
@@ -188,3 +201,21 @@ bool CheckList::draw (HANDLE hCSB)
 	return true;
 }
 
+//clear checklist
+bool CheckList::clear(HANDLE hCSB)
+{
+	int height = getCLheight();
+	COORD coordScreen = { x, y };
+	DWORD dwConSize = getCLWidth();
+	DWORD cCharsWritten;
+
+	for (SHORT i = 0; i < height; i++)
+	{
+		coordScreen = { x, y+i };
+		if (!FillConsoleOutputCharacter(hCSB,' ', dwConSize, coordScreen, &cCharsWritten))
+		{
+			return false;
+		}
+	}
+	return true;
+}
