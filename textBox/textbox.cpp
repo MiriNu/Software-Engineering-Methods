@@ -1,7 +1,7 @@
 #include "textbox.h"
 #include <iostream>
 #include <stdlib.h>
-#include <fstream>
+
 
 TextBox::TextBox(short width, short top, short left) : 
     width(width), top(top), left(left), hasBorder(true), value(""), 
@@ -11,13 +11,10 @@ TextBox::TextBox(short width, short top, short left) :
     }
 
 void TextBox:: handleMouseEvent(MOUSE_EVENT_RECORD& event){
-    std::ofstream tmp;
-    tmp.open("test.txt");
-    tmp << "here";
+
     if(event.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED){
         auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
         currentCoord = event.dwMousePosition;
-        tmp << "here2";
         SetConsoleCursorPosition(handle, currentCoord);
     }
 }

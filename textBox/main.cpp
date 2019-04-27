@@ -1,4 +1,5 @@
 #include "textbox.h"
+#include <fstream>
 
 int main(int argc, char const* argv[]){
     auto handle = GetStdHandle(STD_INPUT_HANDLE);
@@ -6,7 +7,6 @@ int main(int argc, char const* argv[]){
     tb.draw();
 
     while(1){
-
         INPUT_RECORD ir;
         DWORD count;
 
