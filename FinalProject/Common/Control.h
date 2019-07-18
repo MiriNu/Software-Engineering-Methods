@@ -29,7 +29,7 @@ class Control {
 		void setTextColor(Color textColor) { this->textColor = textColor; };
 		void setBackgroundColor(Color backgroundColor) { this->backgroundColor = backgroundColor; };
 
-		virtual void draw(Graphics& g, int x, int y, size_t z) { border->drawBorder(g, left + x, top + y, width, height); };
+		virtual void draw(Graphics& g, int x, int y, size_t z);
 		virtual void mousePressed(int x, int y, bool isLeft) {};
 		virtual void keyDown(int keyCode, char charecter) {};
 		virtual void getAllControls(vector<Control*>* controls) {};

@@ -32,3 +32,9 @@ void Control::setBorder(Border* border) {
     }
     this->border = border;
 }
+
+void Control::draw(Graphics& g, int x, int y, size_t z) {
+    g.setForeground(getTextColor());
+    g.setBackground(getBackgroundColor());
+    border->drawBorder(g, left + x, top + y, width + 2, height + 2);
+}
