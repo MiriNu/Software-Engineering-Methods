@@ -12,11 +12,11 @@ public:
     COORD currentCoord;
 
     std::string value;
-
+    short oldWidth;
     TextBox(short width, short top, short left);
 
     void draw();
 
+    void handleMouseEvent(MOUSE_EVENT_RECORD&);
     void handleKeyboardEvent(KEY_EVENT_RECORD&);
-    void handleKeyboardEvent(MOUSE_EVENT_RECORD&);
 };
