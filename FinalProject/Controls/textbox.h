@@ -1,12 +1,13 @@
 #include <string>
 #include <windows.h>
 #include "../Common/Control.h"
+#include "Label.h"
 
-class TextBox : public Control{ 
+class TextBox : public Label{ 
+
 public:
     COORD currentCoord;
 
-    std::string value;
     short oldWidth;
     TextBox(short width, short top, short left);
 

@@ -6,7 +6,7 @@ using namespace std;
 
 class Label: public Control
 {   
-    private:
+    protected:
         string value;
     public:
         Label(string);
