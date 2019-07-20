@@ -39,7 +39,6 @@ class Control {
 
 	protected:
 		static Control* focusedControl;
-
 		short left;
 		short top;
 		short width;

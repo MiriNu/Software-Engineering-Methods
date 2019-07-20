@@ -1,14 +1,9 @@
 #include <string>
 #include <windows.h>
+#include "Control.h"
 
-class TextBox{ 
+class TextBox : public Control{ 
 public:
-    short width;
-    short top;
-    short left;
-    bool hasBorder;
-    WORD color;
-    WORD background;
     COORD currentCoord;
 
     std::string value;
