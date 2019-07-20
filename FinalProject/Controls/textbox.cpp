@@ -1,8 +1,4 @@
-#include "textbox.h"
-#include "../Common/Graphics.h"
-#include "../Common/Border/SingleBorder.h"
-#include <iostream>
-#include <stdlib.h>
+#include "TextBox.h"
 
 
 TextBox::TextBox(short width, short top, short left) : Label(left, top, width, 1, new SingleBorder(), Color::White, Color::Black, ""){

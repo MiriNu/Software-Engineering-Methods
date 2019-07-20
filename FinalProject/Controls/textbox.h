@@ -1,7 +1,11 @@
+#pragma once
 #include <string>
-#include <windows.h>
 #include "../Common/Control.h"
 #include "Label.h"
+#include "../Common/Graphics.h"
+#include "../Common/Border/SingleBorder.h"
+#include <iostream>
+#include <stdlib.h>
 
 class TextBox : public Label{ 
 
