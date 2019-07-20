@@ -24,6 +24,8 @@ void TextBox:: keyDown(int keyCode, char character){
     auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
     if((keyCode >= 0x30  && keyCode <= 122) || keyCode == VK_SPACE){
         size_t offset = currentCoord.X - this->left;
+        string s;
+        s += character;
         currentCoord = { currentCoord.X + 1, currentCoord.Y };
         value.insert(offset - 1, &character);
         if(value.length() >= width)
