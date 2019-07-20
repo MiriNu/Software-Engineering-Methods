@@ -11,7 +11,7 @@ TextBox::TextBox(short width, short top, short left) : Control(left, top, width,
         setFocus(*this);
 }
 
-void TextBox:: mousePressed(int x, int y, bool isLeft){\
+void TextBox:: mousePressed(int x, int y, bool isLeft){
     if(isLeft){
         auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
         currentCoord = { x, y };
@@ -63,27 +63,8 @@ void TextBox:: keyDown(int keyCode, char character){
 }
 
 void TextBox::draw(Graphics& g, int x, int y, size_t z){
-    COORD coord =  {left, top};
-    auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleCursorPosition(handle, coord);
     g.setCursorVisibility(true);
     Control::draw(g, x, y, z);
-    for(int i = width; i < oldWidth; ++i)
-        std::cout << " ";
-
-    SetConsoleCursorPosition(handle,{ coord.X, coord.Y + 1 });
-    g.write(value);
-    
-    for(int i = value.length(); i < width; ++i)
-        std::cout << " ";
-    
-    for(int i = width; i < oldWidth + 1; ++i)
-        std::cout << " ";
-
-    SetConsoleCursorPosition(handle,{ left, top + 2 });
-
-    for(int i = width; i < oldWidth; ++i)
-        std::cout << " ";
-
-    SetConsoleCursorPosition(handle, currentCoord);
+    g.write(x + 1, y + 1, value);
+    g.moveTo(left, top);
 }
