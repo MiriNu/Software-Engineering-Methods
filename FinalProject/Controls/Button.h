@@ -11,7 +11,7 @@ class Button : public Label {
 		Button(string value);
 		Button(short left, short top, short width, short height, Border* border, Color textColor, Color backgroundColor, string Value);
 
-		bool addListener(MouseListener *listener);
+		bool addListener(MouseListener* listener);
 
 		virtual void mousePressed(int x, int y, bool isLeft);
 
