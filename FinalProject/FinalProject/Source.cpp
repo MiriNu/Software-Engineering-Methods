@@ -7,13 +7,6 @@
 #include "../Common/Border/NullBorder.h"
 #include "../Common/Border/SingleBorder.h"
 
-<<<<<<< HEAD
-int main(int argc, char** argv){
-
-	TextBox l(12, 3, 3);
-	EventEngine e;
-	e.run(l);
-=======
 int main(int argc, char** argv)
 {
 	Border* B = new DoubleBorder;
@@ -33,5 +26,4 @@ int main(int argc, char** argv)
 	EventEngine e;
 	e.run(P);
 
->>>>>>> 493d78468745dc7fe7288a4f19e47107ac9973b4
 }
