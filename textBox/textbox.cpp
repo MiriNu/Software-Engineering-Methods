@@ -1,14 +1,14 @@
 #include "textbox.h"
+#include "Graphics.h"
+#include "Border/SingleBorder.h"
 #include <iostream>
 #include <stdlib.h>
 
 
-TextBox::TextBox(short width, short top, short left) : 
-    width(width), top(top), left(left), hasBorder(true), value(""), 
-    color(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY){
+TextBox::TextBox(short width, short top, short left) : Control(left, top, width, 1, new SingleBorder(), Color::White, Color::Black), value(""){
         currentCoord = {left + 1 + value.length(), top + 1};
         oldWidth = width;
-    }
+}
 
 void TextBox:: handleMouseEvent(MOUSE_EVENT_RECORD& event){
 
@@ -72,19 +72,11 @@ void TextBox::draw(){
     COORD coord =  {left, top};
     auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleCursorPosition(handle, coord);
-    SetConsoleTextAttribute(handle, color | (background << 4));
-
-    std::cout << (char)0xda;
-    for(int i = 0; i < width; ++i)
-        std::cout << (char)0xc4;    
-
-    std::cout << (char)0xbf;
-
+    Control::draw();
     for(int i = width; i < oldWidth; ++i)
         std::cout << " ";
 
     SetConsoleCursorPosition(handle,{ coord.X, coord.Y + 1 });
-    std::cout << (char)0xb3;
 
     for(int i = 0; i < value.length(); ++i)
         std::cout << value[i];
@@ -95,18 +87,8 @@ void TextBox::draw(){
     for(int i = width; i < oldWidth + 1; ++i)
         std::cout << " ";
 
-    SetConsoleCursorPosition(handle,{ left + width + 1, top + 1 });
-    std::cout << (char)0xb3;
-
-
     SetConsoleCursorPosition(handle,{ left, top + 2 });
-    std::cout << (char)0xc0;
 
-    for(int i = 0; i < width; ++i)
-        std::cout << (char)0xc4;  
-
-    std::cout << (char)0xd9;
-        
     for(int i = width; i < oldWidth; ++i)
         std::cout << " ";
 
