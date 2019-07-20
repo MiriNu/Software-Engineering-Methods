@@ -1,13 +1,10 @@
 #include "../Common/Graphics.h"
-#include "../Controls/Label.h"
+#include "../Controls/textbox.h"
 #include "../Common/EventEngine.h"
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv){
 
-	Label l("Hello World");
-	Control& l2 = l;
+	TextBox l(12, 3, 3);
 	EventEngine e;
 	e.run(l);
-
 }
