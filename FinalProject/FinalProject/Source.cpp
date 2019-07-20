@@ -6,6 +6,7 @@
 #include "../Common/Border/DoubleBorder.h"
 #include "../Common/Border/NullBorder.h"
 #include "../Common/Border/SingleBorder.h"
+#include "../Controls/Label.h"
 
 int main(int argc, char** argv)
 {
@@ -25,5 +26,4 @@ int main(int argc, char** argv)
 	P.addControl(&P2);
 	EventEngine e;
 	e.run(P);
-
 }
