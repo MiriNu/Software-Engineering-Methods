@@ -58,7 +58,7 @@ void Panel::draw(Graphics& g, int x, int y, size_t z) {
 
 void Panel::mousePressed(int x, int y, bool isLeft) {
     if(focusInPanel()) {
-        getFocus()->mousePressed(x, y, isLeft);
+        getFocus()->mousePressed(x - getLeft(), y - getTop(), isLeft);
     }
 }
 
@@ -73,4 +73,8 @@ void Panel::getAllControls(vector<Control*>* controls) {
         controls->push_back(this->controls[i]);
         this->controls[i]->getAllControls(controls);
     }
+}
+
+void Panel::update(int x, int y) {
+    mousePressed(x, y);
 }
