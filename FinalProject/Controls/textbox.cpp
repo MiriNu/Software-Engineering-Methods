@@ -1,11 +1,7 @@
-#include "textbox.h"
-#include "../Common/Graphics.h"
-#include "../Common/Border/SingleBorder.h"
-#include <iostream>
-#include <stdlib.h>
+#include "TextBox.h"
 
 
-TextBox::TextBox(short width, short top, short left) : Control(left, top, width, 1, new SingleBorder(), Color::White, Color::Black), value(""){
+TextBox::TextBox(short width, short top, short left) : Label(left, top, width, 1, new SingleBorder(), Color::White, Color::Black, ""){
         currentCoord = {left + 1 + value.length(), top + 1};
         oldWidth = width;
         setFocus(*this);
@@ -22,12 +18,13 @@ void TextBox:: mousePressed(int x, int y, bool isLeft){
 void TextBox:: keyDown(int keyCode, char character){
     int textWidth = value.length();
     auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    
-    if(keyCode >= 0x30 || keyCode == VK_SPACE){
+    if((keyCode >= 0x30  && keyCode <= 122) || keyCode == VK_SPACE){
         size_t offset = currentCoord.X - this->left;
+        string s;
+        s += character;
         currentCoord = { currentCoord.X + 1, currentCoord.Y };
-        this->value.insert(offset - 1, &character);
-        if(this->value.length() >= width)
+        value.insert(offset - 1, &character);
+        if(value.length() >= width)
             width += 2;
         }
 
@@ -64,7 +61,7 @@ void TextBox:: keyDown(int keyCode, char character){
 
 void TextBox::draw(Graphics& g, int x, int y, size_t z){
     g.setCursorVisibility(true);
-    Control::draw(g, x, y, z);
-    g.write(x + 1, y + 1, value);
-    g.moveTo(left, top);
+    Label::draw(g, x, y, z);
+
+    g.moveTo(currentCoord.X, currentCoord.Y);
 }

@@ -1,3 +1,4 @@
+#pragma once
 #include "../Common/Control.h"
 #include <string>
 
@@ -6,7 +7,7 @@ using namespace std;
 
 class Label: public Control
 {   
-    private:
+    protected:
         string value;
     public:
         Label(string);

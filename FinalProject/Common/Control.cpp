@@ -18,11 +18,7 @@ Control::~Control() {
 
 void Control::setFocus(Control& control) {
     if((focusedControl != &control) && (control.canGetFocus())) {
-        if(focusedControl) {
-            focusedControl->unfocus();
-        }
         focusedControl = &control;
-        focusedControl->focus();
     }
 }
 

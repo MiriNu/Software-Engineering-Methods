@@ -13,7 +13,7 @@ class Panel : public Control {
 
         bool addControl(Control* control);
         Control* getControl(int index);
-        bool focusInPanel();
+        int getFocusIndex();
 
         virtual void draw(Graphics& g, int x, int y, size_t z);
 		virtual void mousePressed(int x, int y, bool isLeft);
@@ -22,4 +22,5 @@ class Panel : public Control {
 
     private:
         vector<Control*> controls;
+        int focusIndex;
 };

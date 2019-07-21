@@ -34,8 +34,7 @@ class Control {
 		virtual void keyDown(int keyCode, char charecter) {};
 		virtual void getAllControls(vector<Control*>* controls) {};
 		virtual bool canGetFocus() { return false; };
-		virtual void focus() {};
-		virtual void unfocus() {};
+		virtual int getFocusIndex() { return -1; };
 
 	protected:
 		static Control* focusedControl;

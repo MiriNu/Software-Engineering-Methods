@@ -49,8 +49,8 @@ void EventEngine::run(Control &c)
 		{
 			auto button = record.Event.MouseEvent.dwButtonState;
 			auto coord = record.Event.MouseEvent.dwMousePosition;
-			auto x = coord.X - c.getLeft();
-			auto y = coord.Y - c.getTop();
+			auto x = coord.X; // - c.getLeft();
+			auto y = coord.Y; // - c.getTop();
 			if (button == FROM_LEFT_1ST_BUTTON_PRESSED || button == RIGHTMOST_BUTTON_PRESSED)
 			{
 				c.mousePressed(x, y, button == FROM_LEFT_1ST_BUTTON_PRESSED);

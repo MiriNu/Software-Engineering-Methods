@@ -1,7 +1,6 @@
 #include "NullBorder.h"
 
-NullBorder::NullBorder() : Border() {}
+NullBorder::NullBorder() : Border(0x20, 0x20, 0x20, 0x20, 0x20, 0x20) {}
 
 NullBorder::~NullBorder() {}
 
-void NullBorder::drawBorder(Graphics& g, short left, short top, short width, short height) {}
