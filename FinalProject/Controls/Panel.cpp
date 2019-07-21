@@ -30,16 +30,20 @@ Control* Panel::getControl(int index) {
     return controls[index];
 }
 
-bool Panel::focusInPanel() {
+int Panel::getFocusIndex() {
     Control* tempPtr = getFocus();
-    if(getFocus() != nullptr) {
-        for(int i = 0; i < controls.size(); ++i) {
-            if(controls[i] == tempPtr) {
-                return true;
-            }
+    for(int i = 0; i < controls.size(); ++i) {
+        if(controls[i] == tempPtr) {
+            focusIndex = i;
+            return i;
+        }
+        else if(controls[i]->getFocusIndex() != -1) {
+            focusIndex = i;
+            return i;
         }
     }
-    return false;
+    focusIndex = -1;
+    return -1;
 }
 
 void Panel::draw(Graphics& g, int x, int y, size_t z) {
@@ -57,14 +61,14 @@ void Panel::draw(Graphics& g, int x, int y, size_t z) {
 }
 
 void Panel::mousePressed(int x, int y, bool isLeft) {
-    if(focusInPanel()) {
-        getFocus()->mousePressed(x - getLeft(), y - getTop(), isLeft);
+    if(getFocusIndex() != -1) {
+        controls[focusIndex]->mousePressed(x - getLeft(), y - getTop(), isLeft);
     }
 }
 
 void Panel::keyDown(int keyCode, char charecter) {
-    if(focusInPanel()) {
-        getFocus()->keyDown(keyCode, charecter);
+    if(getFocusIndex() != -1) {
+        controls[focusIndex]->keyDown(keyCode, charecter);
     }
 }
 
@@ -73,8 +77,4 @@ void Panel::getAllControls(vector<Control*>* controls) {
         controls->push_back(this->controls[i]);
         this->controls[i]->getAllControls(controls);
     }
-}
-
-void Panel::update(int x, int y) {
-    mousePressed(x, y);
 }
