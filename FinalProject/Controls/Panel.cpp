@@ -55,7 +55,7 @@ void Panel::draw(Graphics& g, int x, int y, size_t z) {
             relativeY = controls[i]->getTop();
             g.setForeground(controls[i]->getTextColor());
             g.setBackground(controls[i]->getBackgroundColor());
-            controls[i]->draw(g, x + relativeX, y + relativeY, z);
+            controls[i]->draw(g, x + relativeX + 1, y + relativeY + 1, z);
         }
     }
 }
