@@ -1,7 +1,5 @@
 #include "Panel.h"
 
-Panel::Panel() : Control() {}
-
 Panel::Panel(short left, short top, short width, short height, Border* border, Color textColor, Color backgroundColor) :
     Control(left, top, width, height, border, textColor, backgroundColor) {}
 
@@ -62,7 +60,7 @@ void Panel::draw(Graphics& g, int x, int y, size_t z) {
 
 void Panel::mousePressed(int x, int y, bool isLeft) {
     if(getFocusIndex() != -1) {
-        controls[focusIndex]->mousePressed(x - getLeft(), y - getTop(), isLeft);
+        controls[focusIndex]->mousePressed(x - getLeft() - 1, y - getTop() - 1, isLeft);
     }
 }
 

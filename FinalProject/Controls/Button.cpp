@@ -1,8 +1,6 @@
 #include "Button.h"
 #include <iostream>
 
-Button::Button(string value) : Label(value) {};
-
 Button::Button(short left, short top, short width, short height, Border* border, Color textColor, Color backgroundColor, string value) :
     Label(left, top, width, height, border, textColor, backgroundColor, value) {};
 

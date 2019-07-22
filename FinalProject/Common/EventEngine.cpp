@@ -16,6 +16,8 @@ void EventEngine::run(Control &c)
 	{
 		if (redraw)
 		{
+			_graphics.setForeground(Color::White);
+			_graphics.setBackground(Color::Black);
 			_graphics.clearScreen();
 			_graphics.setCursorVisibility(false);
 			for (size_t z = 0; z < 5; ++z)

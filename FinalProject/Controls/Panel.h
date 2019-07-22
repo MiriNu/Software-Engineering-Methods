@@ -7,7 +7,6 @@ using namespace std;
 
 class Panel : public Control {
     public:
-        Panel();
         Panel(short left, short top, short width, short height, Border* border, Color textColor, Color backgroundColor);
         ~Panel();
 

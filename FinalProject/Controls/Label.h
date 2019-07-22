@@ -10,7 +10,6 @@ class Label: public Control
     protected:
         string value;
     public:
-        Label(string);
         Label(short left, short top, short width, short height, Border* border, Color textColor, Color backgroundColor, string value);
         string getValue();
         void setValue(string);

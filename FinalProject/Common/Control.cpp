@@ -3,10 +3,6 @@
 
 Control* Control::focusedControl = nullptr;
 
-Control::Control() : left(0), top(0), width(1), height(1), textColor(Color::White), backgroundColor(Color::Black) {
-    border = new NullBorder;
-}
-
 Control::Control(short left, short top, short width, short height, Border* border, Color textColor, Color backgroundColor) :
     left(left), top(top), width(width), height(height), border(border), textColor(textColor), backgroundColor(backgroundColor) {}
 
