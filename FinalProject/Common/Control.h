@@ -12,6 +12,8 @@ class Control {
 
 		static Control* getFocus() { return focusedControl; };
 		static void setFocus(Control& control);
+		static bool getMessageBoxLock() { return messageBoxLock; };
+		static void setMessageBoxLock(bool isLocked);
 
 		virtual short getLeft() { return left; };
 		virtual short getTop() { return top; };
@@ -37,6 +39,8 @@ class Control {
 
 	protected:
 		static Control* focusedControl;
+		static bool messageBoxLock;
+
 		short left;
 		short top;
 		short width;
