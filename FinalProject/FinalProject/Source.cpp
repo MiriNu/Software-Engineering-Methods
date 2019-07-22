@@ -7,25 +7,14 @@
 #include "../Common/Border/NullBorder.h"
 #include "../Common/Border/SingleBorder.h"
 #include "../Controls/Label.h"
+#include "../Controls/MessageBox.h"
 
 int main(int argc, char** argv)
 {
 	Border* B = new DoubleBorder;
-	Border* B2 = new SingleBorder;
-	Border* B3 = new NullBorder;
-	Panel P(5, 5, 50, 20, B, Color::White, Color::Black);
-	Panel P2(5, 5, 30, 10, B2, Color::Blue, Color::Black);
-	Panel P3(3, 3, 10, 5, B3, Color::Green, Color::Orange);
-	Label l("panel 1");
-	Label l2("panel 2");
-	Label l3("panel 3");
-	l.setTextColor(Color::Cyan);
-	l2.setTextColor(Color::Green);
-	P3.addControl(&l3);
-	P2.addControl(&l2);
-	P2.addControl(&P3);
-	P.addControl(&l);
-	P.addControl(&P2);
+	Panel P(0, 0, 50, 20, B, Color::White, Color::Black);
+	semMessageBox M(0, 0, 30, B, Color::White, Color::Cyan, "Message");
+	P.addControl(&M);
 	EventEngine e;
 	e.run(P);
 }

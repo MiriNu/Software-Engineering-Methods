@@ -1,7 +1,5 @@
 #include "Border.h"
 
-Border::Border() {}
-
 Border::Border(char topLeft, char topRight, char bottomLeft, char bottomRight, char horizontal, char vertical) :
     topLeft(topLeft), topRight(topRight), bottomLeft(bottomLeft), bottomRight(bottomRight), horizontal(horizontal),
     vertical(vertical) {}

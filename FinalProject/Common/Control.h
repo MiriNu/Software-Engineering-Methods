@@ -7,7 +7,6 @@ using namespace std;
 
 class Control {
 	public:
-		Control();
 		Control(short left, short top, short width, short height, Border* border, Color textColor, Color backgroundColor);
 		virtual ~Control() = 0;
 
