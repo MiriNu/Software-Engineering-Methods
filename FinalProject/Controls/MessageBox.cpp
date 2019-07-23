@@ -40,8 +40,10 @@ void semMessageBox::draw(Graphics& g, int x, int y, size_t z) {
 }
 
 void semMessageBox::mousePressed(int x, int y, bool isLeft) {
-    ok.mousePressed(x - getLeft() - 1, y - getTop() - 1, isLeft);
-    cancel.mousePressed(x - getLeft() - 1, y - getTop() - 1, isLeft);
+    if(show == true) {
+        ok.mousePressed(x - getLeft() - 1, y - getTop() - 1, isLeft);
+        cancel.mousePressed(x - getLeft() - 1, y - getTop() - 1, isLeft);
+    }
 }
 
 void semMessageBox::update(int x, int y) {
