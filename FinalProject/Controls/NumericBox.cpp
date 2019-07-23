@@ -1,10 +1,11 @@
 #include "NumericBox.h"
 
-NumericBox::NumericBox(short left, short top, short width, short height, Border* border, Color textColor, Color backgroundColor) :
-    Control(left, top, width + 1, height + 1, new SingleBorder(), textColor, backgroundColor),
+NumericBox::NumericBox(short left, short top, int maxVal, int minVal, Border* border, Color textColor, Color backgroundColor) :
+    Control(left, top, 16, 3, new SingleBorder(), textColor, backgroundColor),
     value(left + 7, top + 1, 1, 1, new SingleBorder(), textColor, backgroundColor, "0"),
     add(left + 2, top + 1, 1, 1, new SingleBorder(), textColor, backgroundColor, " +"),
-    subtract(left + 12, top + 1, 1, 1, new SingleBorder(), textColor, backgroundColor, " -")
+    subtract(left + 12, top + 1, 1, 1, new SingleBorder(), textColor, backgroundColor, " -"),
+    max(maxVal), min(minVal)
 {
     add.addListener(this);
     subtract.addListener(this);
@@ -29,12 +30,17 @@ void NumericBox::update(int x, int y){
 
 void NumericBox::addToVal(){
     int numericVal = atoi(value.getValue().c_str());
+    if(numericVal >= max)
+        return;
+
     ++numericVal;
     value.setValue(to_string(numericVal));
 }
 
 void NumericBox::subFromVal(){
     int numericVal = atoi(value.getValue().c_str());
+    if(numericVal <= min)
+        return;
     --numericVal;
     value.setValue(to_string(numericVal));
 }
