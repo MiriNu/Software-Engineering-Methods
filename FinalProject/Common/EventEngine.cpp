@@ -35,7 +35,7 @@ void EventEngine::run(Control &c)
 		case KEY_EVENT:
 		{
 			auto f = Control::getFocus();
-			if (f != nullptr && record.Event.KeyEvent.bKeyDown)
+			if (f != nullptr && record.Event.KeyEvent.bKeyDown && c.getMessageBoxLock() == false)
 			{
 				auto code = record.Event.KeyEvent.wVirtualKeyCode;
 				auto chr = record.Event.KeyEvent.uChar.AsciiChar;
@@ -51,8 +51,8 @@ void EventEngine::run(Control &c)
 		{
 			auto button = record.Event.MouseEvent.dwButtonState;
 			auto coord = record.Event.MouseEvent.dwMousePosition;
-			auto x = coord.X; // - c.getLeft();
-			auto y = coord.Y; // - c.getTop();
+			auto x = coord.X;
+			auto y = coord.Y;
 			if (button == FROM_LEFT_1ST_BUTTON_PRESSED || button == RIGHTMOST_BUTTON_PRESSED)
 			{
 				c.mousePressed(x, y, button == FROM_LEFT_1ST_BUTTON_PRESSED);

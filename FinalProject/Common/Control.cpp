@@ -2,6 +2,7 @@
 #include "Border/NullBorder.h"
 
 Control* Control::focusedControl = nullptr;
+bool Control::messageBoxLock = false;
 
 Control::Control(short left, short top, short width, short height, Border* border, Color textColor, Color backgroundColor) :
     left(left), top(top), width(width), height(height), border(border), textColor(textColor), backgroundColor(backgroundColor) {}
@@ -16,6 +17,10 @@ void Control::setFocus(Control& control) {
     if((focusedControl != &control) && (control.canGetFocus())) {
         focusedControl = &control;
     }
+}
+
+void Control::setMessageBoxLock(bool isLocked) {
+    messageBoxLock = isLocked;
 }
 
 void Control::setBorder(Border* border) {

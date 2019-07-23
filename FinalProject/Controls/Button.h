@@ -8,7 +8,7 @@ using namespace std;
 
 class Button : public Label {
 	public:
-		Button(short left, short top, short width, short height, Border* border, Color textColor, Color backgroundColor, string Value);
+		Button(short left, short top, short width, Border* border, Color textColor, Color backgroundColor, string Value);
 
 		bool addListener(MouseListener* listener);
 
