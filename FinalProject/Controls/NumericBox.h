@@ -15,5 +15,7 @@ protected:
 public:
     NumericBox(short left, short top, short width, short height, Border* border, Color textColor, Color backgroundColor, string Value);
     void draw(Graphics& g, int x, int y, size_t z);
-
+    void update(int x, int y);
+    void addToVal();
+    void subFromVal();
 };

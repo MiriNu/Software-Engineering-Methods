@@ -7,10 +7,12 @@
 #include "../Common/Border/NullBorder.h"
 #include "../Common/Border/SingleBorder.h"
 #include "../Controls/Label.h"
+#include "../Controls/NumericBox.h"
+#include "../Controls/MessageBox.h"
 
 int main(int argc, char** argv)
 {
-	TextBox t(12, 3, 3);
+	NumericBox t(5, 5, 5, 5, new SingleBorder(), Color::White, Color::Black, " 0");
 	EventEngine e;
 	e.run(t);
 }
