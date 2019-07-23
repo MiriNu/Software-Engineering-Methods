@@ -21,4 +21,7 @@ public:
     void update(int x, int y);
     void addToVal();
     void subFromVal();
+    int setMin(int min);
+    int setMax(int max);
+    int getVal();
 };

@@ -50,6 +50,25 @@ void NumericBox::mousePressed(int x, int y, bool isLeft) {
     subtract.mousePressed(x, y, isLeft);
 }
 
+int NumericBox::setMin(int min){
+    if(min > this->max)
+        return -1;
+
+    this->min = min;
+    return 0;
+}
+
+int NumericBox::setMax(int max){
+    if(max < this->min)
+        return -1;
+        
+    this->max = max;
+}
+
+int NumericBox::getVal(){
+    return atoi(value.getValue().c_str());
+}
+
 void NumericBox::draw(Graphics& g, int x, int y, size_t z){
     short relativeX, relativeY;
     if(z == 0){
