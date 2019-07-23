@@ -33,9 +33,27 @@ void ComboBox::mousePressed(int x, int y, bool isLeft){
 
 void ComboBox::keyDown(int keyCode, char character){
 /* check if enter, if yes, update value in text. if key down/up, update curr to index of pressed */
-    text.setValue(list[curr].getValue());
+    if("up"){
+        Color temp = list[curr].getTextColor();
+        setTextColor(list[curr].getBackgroundColor());
+        setBackgroundColor(temp);
+        --curr;
+        Color temp = list[curr].getTextColor();
+        setTextColor(list[curr].getBackgroundColor());
+        setBackgroundColor(temp);
+    }
+
+    if("down"){
+        Color temp = list[curr].getTextColor();
+        setTextColor(list[curr].getBackgroundColor());
+        setBackgroundColor(temp);
+        ++curr;
+        Color temp = list[curr].getTextColor();
+        setTextColor(list[curr].getBackgroundColor());
+        setBackgroundColor(temp);
+    }
 }
-void ComboBox::update(int x, int y);
+void ComboBox::update(int x, int y){}
 
 void ComboBox::draw(Graphics& g, int x, int y, size_t z){
     if(z == 0){
