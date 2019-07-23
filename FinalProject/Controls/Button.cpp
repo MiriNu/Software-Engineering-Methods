@@ -1,8 +1,8 @@
 #include "Button.h"
 #include <iostream>
 
-Button::Button(short left, short top, short width, short height, Border* border, Color textColor, Color backgroundColor, string value) :
-    Label(left, top, width, height, border, textColor, backgroundColor, value) {};
+Button::Button(short left, short top, short width, Border* border, Color textColor, Color backgroundColor, string value) :
+    Label(left, top, width, border, textColor, backgroundColor, value) {};
 
 bool Button::addListener(MouseListener *listener) {
     if(listener != nullptr) {

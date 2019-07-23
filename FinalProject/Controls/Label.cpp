@@ -1,8 +1,8 @@
 #include "Label.h"
 #include <iostream>
 
-Label::Label(short left, short top, short width, short height, Border* border, Color textColor, Color backgroundColor, string value) :
-    Control(left, top, width, height, border, textColor, backgroundColor), value(value) {};
+Label::Label(short left, short top, short width, Border* border, Color textColor, Color backgroundColor, string value) :
+    Control(left, top, width, 1, border, textColor, backgroundColor), value(value) {};
 
 string Label::getValue() {
     return this->value;

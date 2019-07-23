@@ -2,9 +2,9 @@
 
 NumericBox::NumericBox(short left, short top, int maxVal, int minVal, Border* border, Color textColor, Color backgroundColor) :
     Control(left, top, 16, 3, new SingleBorder(), textColor, backgroundColor),
-    value(left + 7, top + 1, 1, 1, new SingleBorder(), textColor, backgroundColor, "0"),
-    add(left + 2, top + 1, 1, 1, new SingleBorder(), textColor, backgroundColor, " +"),
-    subtract(left + 12, top + 1, 1, 1, new SingleBorder(), textColor, backgroundColor, " -"),
+    value(left + 7, top + 1, 1, new SingleBorder(), textColor, backgroundColor, "0"),
+    add(left + 2, top + 1, 1, new SingleBorder(), textColor, backgroundColor, " +"),
+    subtract(left + 12, top + 1, 1, new SingleBorder(), textColor, backgroundColor, " -"),
     max(maxVal), min(minVal)
 {
     add.addListener(this);

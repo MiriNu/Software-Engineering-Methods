@@ -1,7 +1,7 @@
 #include "TextBox.h"
 
 
-TextBox::TextBox(short width, short top, short left) : Label(left, top, width, 1, new SingleBorder(), Color::White, Color::Black, ""){
+TextBox::TextBox(short width, short top, short left) : Label(left, top, width, new SingleBorder(), Color::White, Color::Black, ""){
         currentCoord = {left + 1 + value.length(), top + 1};
         oldWidth = width;
         setFocus(*this);

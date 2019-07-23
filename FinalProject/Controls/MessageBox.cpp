@@ -4,9 +4,9 @@
 
 semMessageBox::semMessageBox(short left, short top, short width, Border* border, Color textColor, Color backgroundColor, string message, string ok, string cancel, Button* showButton) :
     Control(left, top, width, 7, border, textColor, backgroundColor),
-    message(Label((width - message.size()) / 2, 0, message.size(), 1, new NullBorder, textColor, backgroundColor, message)),
-    ok(Button(0, 4, ok.size(), 1, new SingleBorder, Color::White, Color::Green, ok)),
-    cancel(Button(width - cancel.size() - 2, 4, cancel.size(), 1, new SingleBorder, Color::White, Color::Red, cancel)),
+    message(Label((width - message.size()) / 2, 0, message.size(), new NullBorder, textColor, backgroundColor, message)),
+    ok(Button(0, 4, ok.size(), new SingleBorder, Color::White, Color::Green, ok)),
+    cancel(Button(width - cancel.size() - 2, 4, cancel.size(), new SingleBorder, Color::White, Color::Red, cancel)),
     showButton(showButton) {
         returnValue = "";
         show = false;
