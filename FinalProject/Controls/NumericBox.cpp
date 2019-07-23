@@ -72,18 +72,18 @@ int NumericBox::getVal(){
 void NumericBox::draw(Graphics& g, int x, int y, size_t z){
     short relativeX, relativeY;
     if(z == 0){
-    Control::draw(g, x, y, z);
+        Control::draw(g, x, y, z);
 
-    relativeX = value.getLeft();
-    relativeY = value.getTop();
-    value.draw(g, relativeX, relativeY, z);
+        relativeX = value.getLeft();
+        relativeY = value.getTop();
+        value.draw(g, relativeX, relativeY, z);
 
-    relativeX = add.getLeft();
-    relativeY = add.getTop();
-    add.draw(g, relativeX, relativeY, z);
+        relativeX = add.getLeft();
+        relativeY = add.getTop();
+        add.draw(g, relativeX, relativeY, z);
 
-    relativeX = subtract.getLeft();
-    relativeY = subtract.getTop();
-    subtract.draw(g, relativeX, relativeY, z);
+        relativeX = subtract.getLeft();
+        relativeY = subtract.getTop();
+        subtract.draw(g, relativeX, relativeY, z);
     }
 }

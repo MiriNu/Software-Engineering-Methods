@@ -20,7 +20,7 @@ class ComboBox : public Control, public MouseListener {
         void update(int x, int y);
 
     private:
-        vector<Button> list;
+        vector<Button*> list;
         Button showButton;
         Label text;
         bool show;
