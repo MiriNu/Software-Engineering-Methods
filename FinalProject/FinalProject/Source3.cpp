@@ -12,7 +12,7 @@
 
 int main(int argc, char** argv)
 {
-	NumericBox t(5, 5, 5, 5, new SingleBorder(), Color::White, Color::Black, " 0");
+	NumericBox t(5, 5, 15, 2, new SingleBorder(), Color::White, Color::Black);
 	EventEngine e;
 	e.run(t);
 }
