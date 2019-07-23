@@ -5,7 +5,7 @@ NumericBox::NumericBox(short left, short top, int maxVal, int minVal, Border* bo
     value(left + 7, top + 1, 1, new SingleBorder(), textColor, backgroundColor, "0"),
     add(left + 2, top + 1, 1, new SingleBorder(), textColor, backgroundColor, " +"),
     subtract(left + 12, top + 1, 1, new SingleBorder(), textColor, backgroundColor, " -"),
-    max(maxVal), min(minVal)
+    maxVal(maxVal), minVal(minVal)
 {
     add.addListener(this);
     subtract.addListener(this);
@@ -30,7 +30,7 @@ void NumericBox::update(int x, int y){
 
 void NumericBox::addToVal(){
     int numericVal = atoi(value.getValue().c_str());
-    if(numericVal >= max)
+    if(numericVal >= maxVal)
         return;
 
     ++numericVal;
@@ -39,7 +39,7 @@ void NumericBox::addToVal(){
 
 void NumericBox::subFromVal(){
     int numericVal = atoi(value.getValue().c_str());
-    if(numericVal <= min)
+    if(numericVal <= minVal)
         return;
     --numericVal;
     value.setValue(to_string(numericVal));
@@ -51,18 +51,18 @@ void NumericBox::mousePressed(int x, int y, bool isLeft) {
 }
 
 int NumericBox::setMin(int min){
-    if(min > this->max)
+    if(min > this->maxVal)
         return -1;
 
-    this->min = min;
+    this->minVal = min;
     return 0;
 }
 
 int NumericBox::setMax(int max){
-    if(max < this->min)
+    if(max < this->minVal)
         return -1;
         
-    this->max = max;
+    this->maxVal = max;
 }
 
 int NumericBox::getVal(){

@@ -11,8 +11,8 @@ protected:
     Button add;
     Button subtract;
     Label value;
-    int max;
-    int min;
+    int maxVal;
+    int minVal;
 
 public:
     NumericBox(short left, short top, int maxVal, int minVal, Border* border, Color textColor, Color backgroundColor);
