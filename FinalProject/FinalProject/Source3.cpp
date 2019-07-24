@@ -16,8 +16,13 @@ int main(int argc, char** argv)
 	ComboBox t(5, 5, new SingleBorder(), Color::White, Color::Black);
 	//NumericBox t(5, 5 ,5, 0 ,new SingleBorder(), Color::White, Color::Black);
 
-	 t.addToList("Hey");
-	 t.addToList("Hello");
+	t.addToList("Hey");
+	t.addToList("Hello");
+	t.addToList("hi");
+	t.addToList("bla");
+	t.addToList("blue");
+	t.addToList("bel");
+
 	EventEngine e;
 	e.run(t);
 }

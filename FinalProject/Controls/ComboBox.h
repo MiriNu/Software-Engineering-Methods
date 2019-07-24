@@ -16,6 +16,7 @@ class ComboBox : public Control, public MouseListener {
         void draw(Graphics& g, int x, int y, size_t z);
 		void mousePressed(int x, int y, bool isLeft);
         void keyDown(int keyCode, char character);
+        void invertColor(Button* button);
 		bool canGetFocus() { return true; };
         void update(int x, int y);
 
