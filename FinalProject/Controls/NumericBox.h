@@ -24,4 +24,5 @@ public:
     int setMin(int min);
     int setMax(int max);
     int getVal();
+    void setVel(int val){ value.setValue(to_string(val)); }
 };
