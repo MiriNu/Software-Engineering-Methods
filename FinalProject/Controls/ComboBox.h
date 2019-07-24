@@ -9,9 +9,6 @@ class ComboBox : public Control, public MouseListener {
     public:
         ComboBox(short left, short top, Border* border, Color textColor, Color backgroundColor);
         ~ComboBox() {};
-
-        int getSelected();
-        void setSelected(int index);
         void addToList(string toAdd);
         void draw(Graphics& g, int x, int y, size_t z);
 		void mousePressed(int x, int y, bool isLeft);
@@ -27,6 +24,5 @@ class ComboBox : public Control, public MouseListener {
         Button showButton;
         Label text;
         bool show;
-        int selected;
         int curr;
 };

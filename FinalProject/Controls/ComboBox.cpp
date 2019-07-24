@@ -5,18 +5,10 @@ ComboBox::ComboBox(short left, short top, Border* border, Color textColor, Color
     Control(left, top, 17, 4, border, textColor, backgroundColor),
     showButton(left + 15, top + 1, 1, new SingleBorder(), textColor, backgroundColor, " +"),
     text(left + 1, top + 1, 10, new SingleBorder(), textColor, backgroundColor, ""),
-    selected(0), show(false), curr(0)
+    show(false), curr(0)
 {
     showButton.addListener(this);
     setFocus(*this);
-}
-
-int ComboBox::getSelected(){
-    return selected;
-}
-
-void ComboBox::setSelected(int index){
-    selected = index;
 }
 
 void ComboBox::addToList(string toAdd){
@@ -41,7 +33,6 @@ void ComboBox::keyDown(int keyCode, char character){
             text.setValue(list[curr]->getValue());
             show = false;
             showButton.setValue(" +");
-            selected = curr;
             invertColor(list[curr]);
             curr = 0;
             return;
@@ -82,7 +73,6 @@ void ComboBox::update(int x, int y, string s){
         for(unsigned int i = 0; i < list.size(); ++i){
             if(s == list[i]->getValue()){
                 text.setValue(list[i]->getValue());
-                selected = i;
                 show = false;
                 changed = true;
             }
