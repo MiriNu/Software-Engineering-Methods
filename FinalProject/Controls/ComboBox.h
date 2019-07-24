@@ -17,8 +17,10 @@ class ComboBox : public Control, public MouseListener {
 		void mousePressed(int x, int y, bool isLeft);
         void keyDown(int keyCode, char character);
         void invertColor(Button* button);
+        string getValue(){return text.getValue();}
+
 		bool canGetFocus() { return true; };
-        void update(int x, int y);
+        void update(int x, int y, string s);
 
     private:
         vector<Button*> list;

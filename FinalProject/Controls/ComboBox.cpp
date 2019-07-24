@@ -3,8 +3,8 @@
 
 ComboBox::ComboBox(short left, short top, Border* border, Color textColor, Color backgroundColor):
     Control(left, top, 20, 20, border, textColor, backgroundColor),
-    showButton(left + 1, top + 1, 10, new SingleBorder(), textColor, backgroundColor, "Show List"),
-    text(left + 1, top + 5, 10, new SingleBorder(), textColor, backgroundColor, ""),
+    showButton(left + 15, top + 1, 1, new SingleBorder(), textColor, backgroundColor, " +"),
+    text(left + 1, top + 1, 10, new SingleBorder(), textColor, backgroundColor, ""),
     selected(0), show(false), curr(0)
 {
     showButton.addListener(this);
@@ -34,16 +34,17 @@ void ComboBox::mousePressed(int x, int y, bool isLeft){
 void ComboBox::keyDown(int keyCode, char character){
     Color tempColor;
     if(show){
-        if(keyCode == VK_RETURN){
+        if(keyCode == VK_RETURN || keyCode == VK_SPACE){
             text.setValue(list[curr]->getValue());
             show = false;
+            showButton.setValue(" +");
             selected = curr;
             invertColor(list[curr]);
             curr = 0;
             return;
         }
 
-        if(keyCode == VK_UP){
+        if(keyCode == VK_UP || keyCode == VK_NUMPAD8){
             if(curr == 0)
                 return;
             
@@ -53,7 +54,7 @@ void ComboBox::keyDown(int keyCode, char character){
             return;
         }
 
-        if(keyCode == VK_DOWN){
+        if(keyCode == VK_DOWN || keyCode == VK_NUMPAD2){
             if(curr + 1 == list.size())
                 return;
 
@@ -66,17 +67,15 @@ void ComboBox::keyDown(int keyCode, char character){
     return;
 }
 
-void ComboBox::update(int x, int y){
+void ComboBox::update(int x, int y, string s){
     int  showL = showButton.getLeft(), showT = showButton.getTop(), showW = showButton.getWidth(), showH = showButton.getHeight();
 
     if(x >= showL && x <= showL + showW && y >= showT && y <= showT + showH) {
         show = !show;
-        if (curr == 0){
-            invertColor(list[0]);
-            return;
-        }
 
-        invertColor(list[curr]);
+        show ? showButton.setValue(" -") : showButton.setValue(" +");
+        curr ? invertColor(list[curr]) : invertColor(list[0]);
+
         curr = 0;
         return;
     }
@@ -84,7 +83,6 @@ void ComboBox::update(int x, int y){
     if(show){
         for(unsigned int i = 0; i < list.size(); ++i){
             int  ButtonL = list[i]->getLeft(), ButtonT = list[i]->getTop(), ButtonW = list[i]->getWidth(), ButtonH = list[i]->getHeight();
-            std::cout << "x: " << x << "y: " << y << std::endl << "buttonL: " << ButtonL << " ButtonT: " << ButtonT << std::endl;
             if(x >= ButtonL && x <= ButtonL + ButtonW && y >= ButtonT && y <= ButtonT + ButtonH) {
                 text.setValue(list[i]->getValue());
                 show = false;
