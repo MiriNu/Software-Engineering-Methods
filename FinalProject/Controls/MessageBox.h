@@ -18,7 +18,7 @@ class semMessageBox : public Control, public MouseListener {
         virtual void draw(Graphics& g, int x, int y, size_t z);
 		virtual void mousePressed(int x, int y, bool isLeft);
 		virtual bool canGetFocus() { return true; };
-        virtual void update(int x, int y);
+        virtual void update(int x, int y, string s);
 
     private:
         Label message;

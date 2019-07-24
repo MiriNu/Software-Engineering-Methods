@@ -46,7 +46,7 @@ void semMessageBox::mousePressed(int x, int y, bool isLeft) {
     }
 }
 
-void semMessageBox::update(int x, int y) {
+void semMessageBox::update(int x, int y, string s) {
     int okl = ok.getLeft(), okt = ok.getTop(), okw = ok.getWidth(), okh = ok.getHeight();
     int cal = cancel.getLeft(), cat = cancel.getTop(), caw = cancel.getWidth(), cah = cancel.getHeight();
     int shl = showButton->getLeft(), sht = showButton->getTop(), shw = showButton->getWidth(), shh = showButton->getHeight();

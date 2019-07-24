@@ -21,7 +21,7 @@ void Button::mousePressed(int x, int y, bool isLeft) {
     int l = getLeft(), t = getTop(), w = getWidth(), h = getHeight();
     if(x >= l && x <= l + w &&  y >= t && y <= t + h && isLeft) {
         for(int i = 0; i < listeners.size(); ++i) {
-            listeners[i]->update(x, y);
+            listeners[i]->update(x, y, getValue());
         }
     }
 }

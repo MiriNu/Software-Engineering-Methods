@@ -18,7 +18,7 @@ public:
     NumericBox(short left, short top, int maxVal, int minVal, Border* border, Color textColor, Color backgroundColor);
     void draw(Graphics& g, int x, int y, size_t z);
     void mousePressed(int x, int y, bool isLeft);
-    void update(int x, int y);
+    void update(int x, int y, string s);
     void addToVal();
     void subFromVal();
     int setMin(int min);

@@ -20,7 +20,8 @@ void ComboBox::setSelected(int index){
 }
 
 void ComboBox::addToList(string toAdd){
-    list.push_back(new Button(left + 1, text.getTop() + ( (1 + list.size()) * 3), 10, new SingleBorder(), Color::White, Color::Black, toAdd));
+    Button* toAdd = new Button(left + 1, text.getTop() + ( (1 + list.size()) * 3), 10, new SingleBorder(), Color::White, Color::Black, toAdd);
+    list.push_back(toAdd);
 }
 
 void ComboBox::mousePressed(int x, int y, bool isLeft){
@@ -68,9 +69,8 @@ void ComboBox::keyDown(int keyCode, char character){
 }
 
 void ComboBox::update(int x, int y, string s){
-    int  showL = showButton.getLeft(), showT = showButton.getTop(), showW = showButton.getWidth(), showH = showButton.getHeight();
-
-    if(x >= showL && x <= showL + showW && y >= showT && y <= showT + showH) {
+    std::cout << "x: " << x << " y: " << y << std::endl;
+    if(s.compare(" +") == 0 || s.compare(" -") == 0){
         show = !show;
 
         show ? showButton.setValue(" -") : showButton.setValue(" +");
@@ -80,10 +80,9 @@ void ComboBox::update(int x, int y, string s){
         return;
     }
 
-    if(show){
+    else if(show){
         for(unsigned int i = 0; i < list.size(); ++i){
-            int  ButtonL = list[i]->getLeft(), ButtonT = list[i]->getTop(), ButtonW = list[i]->getWidth(), ButtonH = list[i]->getHeight();
-            if(x >= ButtonL && x <= ButtonL + ButtonW && y >= ButtonT && y <= ButtonT + ButtonH) {
+            if(s == list[i]->getValue()){
                 text.setValue(list[i]->getValue());
                 show = false;
                 return;
@@ -92,7 +91,6 @@ void ComboBox::update(int x, int y, string s){
     }
 
     return;
-
 }
 
 void ComboBox::invertColor(Button* button){
@@ -112,4 +110,5 @@ void ComboBox::draw(Graphics& g, int x, int y, size_t z){
             }
         }
     }
+    g.moveTo(25, 25);
 }
