@@ -20,8 +20,9 @@ void ComboBox::setSelected(int index){
 }
 
 void ComboBox::addToList(string toAdd){
-    Button* toAdd = new Button(left + 1, text.getTop() + ( (1 + list.size()) * 3), 10, new SingleBorder(), Color::White, Color::Black, toAdd);
-    list.push_back(toAdd);
+    Button* newButton = new Button(left + 1, text.getTop() + ( (1 + list.size()) * 3), 10, new SingleBorder(), Color::White, Color::Black, toAdd);
+    newButton->addListener(this);
+    list.push_back(newButton);
 }
 
 void ComboBox::mousePressed(int x, int y, bool isLeft){
@@ -69,25 +70,28 @@ void ComboBox::keyDown(int keyCode, char character){
 }
 
 void ComboBox::update(int x, int y, string s){
-    std::cout << "x: " << x << " y: " << y << std::endl;
+    bool changed = false;
+
     if(s.compare(" +") == 0 || s.compare(" -") == 0){
         show = !show;
-
-        show ? showButton.setValue(" -") : showButton.setValue(" +");
-        curr ? invertColor(list[curr]) : invertColor(list[0]);
-
-        curr = 0;
-        return;
+        changed = true;
     }
 
     else if(show){
         for(unsigned int i = 0; i < list.size(); ++i){
             if(s == list[i]->getValue()){
                 text.setValue(list[i]->getValue());
+                selected = i;
                 show = false;
-                return;
+                changed = true;
             }
         }
+    }
+
+    if(changed){
+        show ? showButton.setValue(" -") : showButton.setValue(" +");
+        curr ? invertColor(list[curr]) : invertColor(list[0]);
+        curr = 0;
     }
 
     return;
