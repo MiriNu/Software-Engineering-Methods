@@ -2,7 +2,7 @@
 #include "../Common/Border/SingleBorder.h"
 
 ComboBox::ComboBox(short left, short top, Border* border, Color textColor, Color backgroundColor):
-    Control(left, top, 20, 20, border, textColor, backgroundColor),
+    Control(left, top, 17, 4, border, textColor, backgroundColor),
     showButton(left + 15, top + 1, 1, new SingleBorder(), textColor, backgroundColor, " +"),
     text(left + 1, top + 1, 10, new SingleBorder(), textColor, backgroundColor, ""),
     selected(0), show(false), curr(0)
@@ -23,6 +23,7 @@ void ComboBox::addToList(string toAdd){
     Button* newButton = new Button(left + 1, text.getTop() + ( (1 + list.size()) * 3), 10, new SingleBorder(), Color::White, Color::Black, toAdd);
     newButton->addListener(this);
     list.push_back(newButton);
+    Control::setHeight(Control::getHeight() + 3);
 }
 
 void ComboBox::mousePressed(int x, int y, bool isLeft){
