@@ -19,4 +19,6 @@ public:
     bool canGetFocus(){ return true; }
     void mousePressed(int x, int y, bool isLeft);
     void keyDown(int keyCode, char character);
+    void setText(string text){ value = text; }
+    string getText() { return value; }
 };
