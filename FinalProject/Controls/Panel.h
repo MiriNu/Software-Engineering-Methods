@@ -7,7 +7,7 @@ using namespace std;
 
 class Panel : public Control {
     public:
-        Panel(short left, short top, short width, short height, Border* border, Color textColor, Color backgroundColor);
+        Panel(short left, short top, Border* border, Color textColor, Color backgroundColor);
         ~Panel();
 
         bool addControl(Control* control);
@@ -22,4 +22,6 @@ class Panel : public Control {
     private:
         vector<Control*> controls;
         int focusIndex;
+
+        void calculateWidthAndHeight();
 };

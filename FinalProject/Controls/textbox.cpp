@@ -4,7 +4,6 @@
 TextBox::TextBox(short width, short top, short left) : Label(left, top, width, new SingleBorder(), Color::White, Color::Black, ""){
         currentCoord = {left + 1 + value.length(), top + 1};
         oldWidth = width;
-        setFocus(*this);
 }
 
 void TextBox:: mousePressed(int x, int y, bool isLeft){
@@ -60,8 +59,7 @@ void TextBox:: keyDown(int keyCode, char character){
 }
 
 void TextBox::draw(Graphics& g, int x, int y, size_t z){
-    g.setCursorVisibility(true);
     Label::draw(g, x, y, z);
-
+    g.setCursorVisibility(true);
     g.moveTo(currentCoord.X, currentCoord.Y);
 }

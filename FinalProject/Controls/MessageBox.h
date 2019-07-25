@@ -14,10 +14,10 @@ class semMessageBox : public Control, public MouseListener {
         void setMessage(string message);
         Button* getShowButton();
         void setShowButton();
+        string getReturnValue() { return returnValue; };
 
         virtual void draw(Graphics& g, int x, int y, size_t z);
 		virtual void mousePressed(int x, int y, bool isLeft);
-		virtual bool canGetFocus() { return true; };
         virtual void update(int x, int y, string s);
 
     private:

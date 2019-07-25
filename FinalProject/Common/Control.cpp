@@ -34,5 +34,6 @@ void Control::draw(Graphics& g, int x, int y, size_t z) {
     int borderPadding = 2;
     g.setForeground(getTextColor());
     g.setBackground(getBackgroundColor());
+    g.setCursorVisibility(false);
     border->drawBorder(g,  x, y, width + borderPadding, height + borderPadding);
 }

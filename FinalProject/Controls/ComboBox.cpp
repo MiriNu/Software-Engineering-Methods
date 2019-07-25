@@ -8,7 +8,6 @@ ComboBox::ComboBox(short left, short top, Border* border, Color textColor, Color
     show(false), curr(0)
 {
     showButton.addListener(this);
-    setFocus(*this);
 }
 
 void ComboBox::addToList(string toAdd){
@@ -105,5 +104,4 @@ void ComboBox::draw(Graphics& g, int x, int y, size_t z){
             }
         }
     }
-    g.moveTo(25, 25);
 }
