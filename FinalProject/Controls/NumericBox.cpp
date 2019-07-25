@@ -61,10 +61,21 @@ int NumericBox::setMax(int max){
         return -1;
         
     this->maxVal = max;
+    return 0;
 }
 
 int NumericBox::getVal(){
     return atoi(value.getValue().c_str());
+}
+
+void NumericBox::setVal(int val) {
+    if(val > maxVal) {
+        val = maxVal;
+    }
+    if(val < minVal) {
+        val = minVal;
+    }
+    value.setValue(to_string(val));
 }
 
 void NumericBox::draw(Graphics& g, int x, int y, size_t z){
