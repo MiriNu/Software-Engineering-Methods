@@ -2,24 +2,19 @@
 #include "../Common/Border/SingleBorder.h"
 
 ComboBox::ComboBox(short left, short top, Border* border, Color textColor, Color backgroundColor):
-    Control(left, top, 20, 20, border, textColor, backgroundColor),
-    text(left + 1, top + 5, 10, new SingleBorder(), textColor, backgroundColor, ""),
-    showButton(left + 1, top + 1, 10, new SingleBorder(), textColor, backgroundColor, "Show List"),
-    selected(0), show(false), curr(0)
+    Control(left, top, 17, 4, border, textColor, backgroundColor),
+    showButton(left + 15, top + 1, 1, new SingleBorder(), textColor, backgroundColor, " +"),
+    text(left + 1, top + 1, 10, new SingleBorder(), textColor, backgroundColor, ""),
+    show(false), curr(0)
 {
     showButton.addListener(this);
 }
 
-int ComboBox::getSelected(){
-    return selected;
-}
-
-void ComboBox::setSelected(int index){
-    selected = index;
-}
-
 void ComboBox::addToList(string toAdd){
-    list.push_back(new Button(left, top + list.size() + 1, 10, new SingleBorder(), Color::White, Color::Black, toAdd));
+    Button* newButton = new Button(left + 1, text.getTop() + ( (1 + list.size()) * 3), 10, new SingleBorder(), Color::White, Color::Black, toAdd);
+    newButton->addListener(this);
+    list.push_back(newButton);
+    Control::setHeight(Control::getHeight() + 3);
 }
 
 void ComboBox::mousePressed(int x, int y, bool isLeft){
@@ -31,36 +26,72 @@ void ComboBox::mousePressed(int x, int y, bool isLeft){
 }
 
 void ComboBox::keyDown(int keyCode, char character){
-/* check if enter, if yes, update value in text. if key down/up, update curr to index of pressed */
     Color tempColor;
     if(show){
-        if(keyCode == VK_RETURN){
+        if(keyCode == VK_RETURN || keyCode == VK_SPACE){
             text.setValue(list[curr]->getValue());
             show = false;
+            showButton.setValue(" +");
+            invertColor(list[curr]);
+            curr = 0;
+            return;
         }
 
-        if(keyCode == VK_UP){
-            tempColor = list[curr]->getTextColor();
-            setTextColor(list[curr]->getBackgroundColor());
-            setBackgroundColor(tempColor);
+        if(keyCode == VK_UP || keyCode == VK_NUMPAD8){
+            if(curr == 0)
+                return;
+            
+            invertColor(list[curr]);
             --curr;
-            tempColor = list[curr]->getTextColor();
-            setTextColor(list[curr]->getBackgroundColor());
-            setBackgroundColor(tempColor);
+            invertColor(list[curr]);
+            return;
         }
 
-        if(keyCode == VK_DOWN){
-            tempColor = list[curr]->getTextColor();
-            setTextColor(list[curr]->getBackgroundColor());
-            setBackgroundColor(tempColor);
+        if(keyCode == VK_DOWN || keyCode == VK_NUMPAD2){
+            if(curr + 1 == list.size())
+                return;
+
+            invertColor(list[curr]);
             ++curr;
-            tempColor = list[curr]->getTextColor();
-            setTextColor(list[curr]->getBackgroundColor());
-            setBackgroundColor(tempColor);
+            invertColor(list[curr]);
+            return;
         }
     }
+    return;
 }
-void ComboBox::update(int x, int y){}
+
+void ComboBox::update(int x, int y, string s){
+    bool changed = false;
+
+    if(s.compare(" +") == 0 || s.compare(" -") == 0){
+        show = !show;
+        changed = true;
+    }
+
+    else if(show){
+        for(unsigned int i = 0; i < list.size(); ++i){
+            if(s == list[i]->getValue()){
+                text.setValue(list[i]->getValue());
+                show = false;
+                changed = true;
+            }
+        }
+    }
+
+    if(changed){
+        show ? showButton.setValue(" -") : showButton.setValue(" +");
+        curr ? invertColor(list[curr]) : invertColor(list[0]);
+        curr = 0;
+    }
+
+    return;
+}
+
+void ComboBox::invertColor(Button* button){
+    Color tempColor = button->getTextColor();
+    button->setTextColor(button->getBackgroundColor());
+    button->setBackgroundColor(tempColor);
+}
 
 void ComboBox::draw(Graphics& g, int x, int y, size_t z){
     if(z == 0){

@@ -14,10 +14,15 @@
 int main(int argc, char** argv)
 {
 	ComboBox t(5, 5, new SingleBorder(), Color::White, Color::Black);
-	//NumericBox t(5, 5 ,5, 0 ,new SingleBorder(), Color::White, Color::Black);
+	NumericBox t2(5, 5 ,5, 0 ,new SingleBorder(), Color::White, Color::Black);
 
-	 t.addToList("Hey");
-	 t.addToList("Hello");
+	t.addToList("Hey");
+	t.addToList("ssss");
+	t.addToList("hi");
+	t.addToList("bla");
+	t.addToList("blue");
+
+
 	EventEngine e;
 	e.run(t);
 }

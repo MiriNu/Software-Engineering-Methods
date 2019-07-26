@@ -1,7 +1,9 @@
 #include "Panel.h"
 
-Panel::Panel(short left, short top, short width, short height, Border* border, Color textColor, Color backgroundColor) :
-    Control(left, top, width, height, border, textColor, backgroundColor) {}
+Panel::Panel(short left, short top, Border* border, Color textColor, Color backgroundColor) :
+    Control(left, top, 1, 1, border, textColor, backgroundColor) {
+        calculateWidthAndHeight();
+}
 
 Panel::~Panel() {}
 
@@ -46,6 +48,7 @@ int Panel::getFocusIndex() {
 
 void Panel::draw(Graphics& g, int x, int y, size_t z) {
     int relativeX, relativeY;
+    calculateWidthAndHeight();
     if(z == 0) {
         Control::draw(g, x, y, z);
         for(int i = 0; i < controls.size(); ++i) {
@@ -91,4 +94,22 @@ void Panel::getAllControls(vector<Control*>* controls) {
         controls->push_back(this->controls[i]);
         this->controls[i]->getAllControls(controls);
     }
+}
+
+void Panel::calculateWidthAndHeight() {
+    short calcWidth = 0, calcHeight = 0, ciLeft, ciTop, ciWidth, ciHeight;
+    for(int i = 0; i < controls.size(); ++i) {
+        ciLeft = controls[i]->getLeft();
+        ciTop = controls[i]->getTop();
+        ciWidth = controls[i]->getWidth();
+        ciHeight = controls[i]->getHeight();
+        if(ciLeft + ciWidth > calcWidth) {
+            calcWidth = ciLeft + ciWidth;
+        }
+        if(ciTop + ciHeight > calcHeight) {
+            calcHeight = ciTop + ciHeight;
+        }
+    }
+    setWidth(calcWidth + 2);
+    setHeight(calcHeight + 2);
 }

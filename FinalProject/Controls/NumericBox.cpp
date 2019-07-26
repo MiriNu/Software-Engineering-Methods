@@ -12,19 +12,17 @@ NumericBox::NumericBox(short left, short top, int maxVal, int minVal, Border* bo
 }
 
 
-void NumericBox::update(int x, int y){
-    int addL = add.getLeft(), addT = add.getTop(), addW = add.getWidth(), addH = add.getHeight();
-    int subL = subtract.getLeft(), subT = subtract.getTop(), subW = subtract.getWidth(), subH = subtract.getHeight();
-
-    if(x >= addL && x <= addL + addW && y >= addT && y <= addT + addH) {
+void NumericBox::update(int x, int y, string s){
+    if(s.compare(" +") == 0){
         addToVal();
         return;
     }
 
-    if(x >= subL && x <= subL + subW && y >= subT && y <= subT + subH) {
+    if(s.compare(" -") == 0){
         subFromVal();
         return;
     }
+
     return;
 }
 
@@ -63,10 +61,21 @@ int NumericBox::setMax(int max){
         return -1;
         
     this->maxVal = max;
+    return 0;
 }
 
 int NumericBox::getVal(){
     return atoi(value.getValue().c_str());
+}
+
+void NumericBox::setVal(int val) {
+    if(val > maxVal) {
+        val = maxVal;
+    }
+    if(val < minVal) {
+        val = minVal;
+    }
+    value.setValue(to_string(val));
 }
 
 void NumericBox::draw(Graphics& g, int x, int y, size_t z){

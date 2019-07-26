@@ -2,5 +2,5 @@
 
 class MouseListener {
 	public:
-		virtual void update(int x, int y) = 0;
+		virtual void update(int x, int y, string s) = 0;
 };
