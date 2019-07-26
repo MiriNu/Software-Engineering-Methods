@@ -1,5 +1,6 @@
 #include "Control.h"
 #include "Border/NullBorder.h"
+#include "../Controls/MessageBox.h"
 
 Control* Control::focusedControl = nullptr;
 bool Control::messageBoxLock = false;
@@ -14,7 +15,7 @@ Control::~Control() {
 }
 
 void Control::setFocus(Control& control) {
-    if((focusedControl != &control) && (control.canGetFocus())) {
+    if((focusedControl != &control) && (control.canGetFocus() || (typeid(control) == typeid(semMessageBox)))) {
         focusedControl = &control;
     }
 }
