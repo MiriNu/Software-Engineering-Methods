@@ -11,7 +11,7 @@ ComboBox::ComboBox(short left, short top, Border* border, Color textColor, Color
 }
 
 void ComboBox::addToList(string toAdd){
-    Button* newButton = new Button(left + 1, text.getTop() + ( (1 + list.size()) * 3), 10, new SingleBorder(), Color::White, Color::Black, toAdd);
+    Button* newButton = new Button(left + 1, text.getTop() + ( (1 + list.size()) * 3), 10, new SingleBorder(), textColor, backgroundColor, toAdd);
     newButton->addListener(this);
     list.push_back(newButton);
     Control::setHeight(Control::getHeight() + 3);
@@ -96,11 +96,11 @@ void ComboBox::invertColor(Button* button){
 void ComboBox::draw(Graphics& g, int x, int y, size_t z){
     if(z == 0){
         Control::draw(g, x, y, z);
-        showButton.draw(g, showButton.getLeft(), showButton.getTop(), z);
-        text.draw(g, text.getLeft(), text.getTop(), z);
+        showButton.draw(g, showButton.getLeft() + 1, showButton.getTop() + 1, z);
+        text.draw(g, text.getLeft() + 1, text.getTop() + 1, z);
         if(show){
             for(unsigned int i = 0; i < list.size(); ++i){
-                list[i]->draw(g, list[i]->getLeft(), list[i]->getTop(), z);
+                list[i]->draw(g, list[i]->getLeft() + 1, list[i]->getTop() + 1, z);
             }
         }
     }
