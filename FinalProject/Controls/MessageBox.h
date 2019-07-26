@@ -12,9 +12,8 @@ class semMessageBox : public Control, public MouseListener {
 
         string getMessage();
         void setMessage(string message);
-        Button* getShowButton();
-        void setShowButton();
         string getReturnValue() { return returnValue; };
+        void setShowButton(Button *button);
 
         virtual void draw(Graphics& g, int x, int y, size_t z);
 		virtual void mousePressed(int x, int y, bool isLeft);
@@ -24,7 +23,7 @@ class semMessageBox : public Control, public MouseListener {
         Label message;
         Button ok;
         Button cancel;
-        Button* showButton;
         string returnValue;
+        Button* showButton;
         bool show;
 };

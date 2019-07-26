@@ -65,7 +65,7 @@ void Panel::draw(Graphics& g, int x, int y, size_t z) {
         relativeY = focusPtr->getTop();
         g.setForeground(focusPtr->getTextColor());
         g.setBackground(focusPtr->getBackgroundColor());
-        focusPtr->draw(g, x + relativeX + 1, y + relativeY + 1, z);
+        focusPtr->draw(g, x + relativeX + 1, y + relativeY + 1, 0);
     }
 }
 

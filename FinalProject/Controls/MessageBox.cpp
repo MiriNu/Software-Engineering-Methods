@@ -23,6 +23,10 @@ void semMessageBox::setMessage(string message) {
     this->message.setValue(message);
 }
 
+void semMessageBox::setShowButton(Button *button) {
+    this->showButton = button;
+}
+
 void semMessageBox::draw(Graphics& g, int x, int y, size_t z) {
     int relativeX, relativeY;
     if(show == true && z == 0) {

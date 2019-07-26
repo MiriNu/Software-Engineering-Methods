@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <typeinfo>
 #include "Graphics.h"
 #include "Border/Border.h"
 
