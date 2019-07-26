@@ -12,7 +12,6 @@ class TextBox : public Label{
 public:
     COORD currentCoord;
 
-    short oldWidth;
     TextBox(short width, short top, short left);
 
     void draw(Graphics& g, int x, int y, size_t z);

@@ -3,29 +3,31 @@
 
 TextBox::TextBox(short width, short top, short left) : Label(left, top, width, new SingleBorder(), Color::White, Color::Black, ""){
         currentCoord = {left + 1 + value.length(), top + 1};
-        oldWidth = width;
 }
 
 void TextBox:: mousePressed(int x, int y, bool isLeft){
-    if(isLeft){
+    int l = getLeft(), t = getTop(), w = value.length(), h = 1;
+    if(x >= l && x <= l + w &&  y >= t && y <= t + h && isLeft) {
         auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
         currentCoord = { x, y };
         SetConsoleCursorPosition(handle, currentCoord);
     }
+
 }
 
 void TextBox:: keyDown(int keyCode, char character){
     int textWidth = value.length();
     auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    
     if((keyCode >= 0x30  && keyCode <= 122) || keyCode == VK_SPACE){
+        if(textWidth >= width)
+            return;
         size_t offset = currentCoord.X - this->left;
         string s;
         s += character;
         currentCoord = { currentCoord.X + 1, currentCoord.Y };
         value.insert(offset - 1, &character);
-        if(value.length() >= width)
-            width += 2;
-        }
+    }
 
     if(keyCode == VK_LEFT || keyCode == VK_RIGHT){
         auto offset = currentCoord.X - this->left;
@@ -51,15 +53,12 @@ void TextBox:: keyDown(int keyCode, char character){
                 currentCoord = { currentCoord.X - 1, currentCoord.Y };
             }
         }
-        if(this->value.length() < width){
-            oldWidth = width;
-            width - 2 > 12 ? width -= 1 : 12;
-        }
     }
 }
 
 void TextBox::draw(Graphics& g, int x, int y, size_t z){
-    Label::draw(g, x, y, z);
+    Label::draw(g, x + 1, y + 1, z);
+    
+    g.moveTo(currentCoord.X + 2, currentCoord.Y + 2);
     g.setCursorVisibility(true);
-    g.moveTo(currentCoord.X, currentCoord.Y);
 }
