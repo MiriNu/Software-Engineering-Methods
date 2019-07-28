@@ -60,12 +60,13 @@ void Panel::draw(Graphics& g, int x, int y, size_t z) {
         }
     }
     if(z == 1) {
-        Control* focusPtr = getFocus();
-        relativeX = focusPtr->getLeft();
-        relativeY = focusPtr->getTop();
-        g.setForeground(focusPtr->getTextColor());
-        g.setBackground(focusPtr->getBackgroundColor());
-        focusPtr->draw(g, x + relativeX + 1, y + relativeY + 1, 0);
+        if(getFocusIndex() != -1) {
+            relativeX = controls[focusIndex]->getLeft();
+            relativeY = controls[focusIndex]->getTop();
+            g.setForeground(controls[focusIndex]->getTextColor());
+            g.setBackground(controls[focusIndex]->getBackgroundColor());
+            controls[focusIndex]->draw(g, x + relativeX + 1, y + relativeY + 1, 0);
+        }
     }
 }
 

@@ -20,6 +20,7 @@ class Control {
 		virtual short getTop() { return top; };
 		virtual short getWidth() { return width; };
 		virtual short getHeight() { return height; };
+		Border* getBorder() { return border; };
 		Color getTextColor() { return textColor; };
 		Color getBackgroundColor() { return backgroundColor; };
 
