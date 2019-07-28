@@ -14,6 +14,6 @@ class Button : public Label {
 
 		virtual void mousePressed(int x, int y, bool isLeft);
 
-	private:
+	protected:
         vector<MouseListener*> listeners;
 };
